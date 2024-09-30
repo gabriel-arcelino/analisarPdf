@@ -33,6 +33,7 @@ def extrair_dados_pdf(caminho_pdf):
                             print(f"Turma inicial: {turma_atual}") 
                         elif turma_identificacao_atual[-1] != id_turma and not verificar_elementos_na_lista(['SEDUC'],linhas[i+1].split(" ")):
                             print("idturma_identificacao_atual ",turma_identificacao_atual[-1],"id_turma ",id_turma)
+                            print(f"linha i+1{linhas[i+1]}")
                             if verificar_elementos_na_lista(["Fundamental","Infantil"],turma_identificacao):
                                 print("nova turma")
                                 turma_identificacao_atual = turma_identificacao
@@ -43,7 +44,7 @@ def extrair_dados_pdf(caminho_pdf):
                             dados_turmas[turma_atual] = 0 
                             print(f"Turma atual definida: {turma_atual}")
                        
-                        elif verificar_elementos_na_lista(["Fundamental","Infantil"],turma_identificacao):
+                        elif verificar_elementos_na_lista(["Fundamental","Infantil"],turma_identificacao) and not verificar_elementos_na_lista(['SEDUC'],linhas[i+1].split(" ")) :
                             if turma_identificacao_atual[0] != turma_identificacao[0]:                                  
                                 turma_identificacao_atual = turma_identificacao
                                 turma_identificacao_atual[-1] = id_turma
@@ -95,7 +96,7 @@ def buscar_linha_pdf(caminho_pdf, string_busca):
     return None
 # Exemplo de uso
 if __name__ == "__main__":
-    caminho_pdf = "relatorio (1).pdf"
+    caminho_pdf = "eunice.pdf"
     nome_escola, dados_turmas = extrair_dados_pdf(caminho_pdf)
     if nome_escola and dados_turmas:
         salvar_dados_excel(nome_escola, dados_turmas)
