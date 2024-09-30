@@ -1,0 +1,39 @@
+# Arquivos e diretórios que não devem ser rastreados pelo Git
+*.xlsx
+*.pdf
+
+# Arquivos de configuração do sistema
+*.config
+*.ini
+
+# Arquivos de cache
+*.cache
+*.tmp
+
+# Arquivos de log
+*.log
+
+# Arquivos de teste
+*.test
+
+# Arquivos de build
+*.build
+*.dist
+
+# Arquivos de dependências
+node_modules/
+vendor/
+.conda/
+.analisarPdf/
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDE
+.idea/
+.vscode/
+
+# Outros arquivos que não devem ser rastreados
+*.env
+*.lock
+*.pid
