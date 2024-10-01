@@ -60,7 +60,7 @@ def extrair_dados_pdf(caminho_pdf):
         return nome_escola, dados_turmas
 
 def obter_id_turma(linha,i):  
-    if verificar_elementos_na_lista(["CRECHE","ESCOLA"],linha[i+1].split(" ")) :
+    if verificar_elementos_na_lista(["CRECHE","ESCOLA","MULTI","MATERNAL"],linha[i+1].split(" ")) :
         return "Turma "+linha[i+1]+" "+linha[i+3].strip()
     return "Turma "+linha[i+1][0]
 
@@ -72,6 +72,7 @@ def verificar_elementos_na_lista(elementos,lista):
     return False
 
 def salvar_dados_excel(nome_escola, dados_turmas):
+    os.makedirs("ESCOLAS ANALISADAS", exist_ok=True)
     workbook = Workbook()
     sheet = workbook.active
     sheet.title = nome_escola
@@ -83,9 +84,8 @@ def salvar_dados_excel(nome_escola, dados_turmas):
         # print(f"Adicionando ao Excel: {turma} - {quantidade} alunos")
 
     # print(f"Salvando dados em {nome_escola}.xlsx")
-    workbook.save(f"{nome_escola}.xlsx")
+    workbook.save(f"ESCOLAS ANALISADAS/{nome_escola}.xlsx")
     print(f"Dados salvos em {nome_escola}.xlsx")
-
 
 def buscar_linha_pdf(caminho_pdf, string_busca):
     with pdfplumber.open(caminho_pdf) as pdf:
@@ -118,7 +118,7 @@ def analisar_pdfs():
         nome_escola, dados_turmas = extrair_dados_pdf(caminho_pdf)
     
         if nome_escola and dados_turmas:
-            salvar_dados_excel(nome_escola, dados_turmas)
+            salvar_dados_excel(nome_escola,dados_turmas)
         else:
             print("Não foi possível extrair os dados do PDF.")
 
